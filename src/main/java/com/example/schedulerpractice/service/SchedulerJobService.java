@@ -5,6 +5,7 @@ import com.example.schedulerpractice.entity.SchedulerJobInfo;
 import com.example.schedulerpractice.job.SampleCronJob;
 import com.example.schedulerpractice.job.SimpleJob;
 import com.example.schedulerpractice.repository.SchedulerRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +22,14 @@ import java.util.List;
 @Slf4j
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class SchedulerJobService {
 
-	@Autowired
-	private Scheduler scheduler;
-
-	@Autowired
-	private SchedulerFactoryBean schedulerFactoryBean;
-
-	@Autowired
-	private SchedulerRepository schedulerRepository;
-
-	@Autowired
-	private ApplicationContext context;
-
-	@Autowired
-	private JobSchedulerCreator scheduleCreator;
+	private final Scheduler scheduler;
+	private final SchedulerFactoryBean schedulerFactoryBean;
+	private final SchedulerRepository schedulerRepository;
+	private final ApplicationContext context;
+	private final JobSchedulerCreator scheduleCreator;
 
 	public SchedulerMetaData getMetaData() throws SchedulerException {
 		SchedulerMetaData metaData = scheduler.getMetaData();
